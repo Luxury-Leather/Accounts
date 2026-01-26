@@ -4,9 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Luxury Leather</title>
+    <title>ClientLedger — Luxury Leather</title>
+    <meta name="description"
+        content="ClientLedger — track client bills & payments. Modern responsive ledger for small businesses." />
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- Firebase (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -20,9 +24,10 @@
         <aside class="sidebar" aria-label="Sidebar" id="sidebar">
             <div class="sidebarTop">
                 <div class="brand">
-                    <div class="logo" aria-hidden="true">CL</div>
+                    <div class="logo" aria-hidden="true">LL</div>
                     <div class="brandText">
                         <div class="title">Luxury Leather</div>
+                        <div class="subtitle">Client ledger • simple & elegant</div>
                     </div>
                 </div>
 
@@ -49,7 +54,7 @@
         <main class="main" id="main" role="main">
             <div id="emptyState" class="emptyState card">
                 <h2>Start tracking your clients</h2>
-                <p>Create a client on the left then tap their name to add purchases or payments.</p>
+                <p>Create a client on the left then tap their name to add bill or payment records.</p>
             </div>
 
             <section id="clientCard" class="clientCard card cool" hidden>
@@ -66,8 +71,8 @@
                         </div>
 
                         <div class="actions" role="group" aria-label="Client actions">
-                            <button class="btn outline" id="btnNewPurchase" type="button">+ Purchase</button>
-                            <button class="btn outline" id="btnNewPayment" type="button">+ Payment</button>
+                            <button class="btn outline" id="btnNewPurchase" type="button">+ Bill Amount</button>
+                            <button class="btn outline" id="btnNewPayment" type="button">+ Payment Amount</button>
                             <button class="btn primary" id="btnDownloadCard" type="button">Download</button>
                         </div>
                     </div>
@@ -77,11 +82,17 @@
                     <div class="transactionsPanel">
                         <div class="txHeader">
                             <h3>Transactions</h3>
-                            <div class="muted">All purchases & payments </div>
+                            <div class="muted">All bill &amp; payment records (newest at top)</div>
                         </div>
                         <div class="txTableWrap">
                             <!-- default table for wide screens -->
                             <table id="txTable" role="table" aria-label="Transactions table">
+                                <colgroup>
+                                    <col style="width:20%">
+                                    <col style="width:30%">
+                                    <col style="width:25%">
+                                    <col style="width:25%">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th scope="col">Date</th>
@@ -101,21 +112,13 @@
                     <aside class="rightPanel" aria-label="Client summary">
                         <div class="card small quickStats">
                             <div class="stat">
-                                <div class="label">Total Purchases</div>
+                                <div class="label">Total Bill Amount</div>
                                 <div id="statPurchases" class="value">₹0</div>
                             </div>
                             <div class="stat">
-                                <div class="label">Total Payments</div>
+                                <div class="label">Total Payment Amount</div>
                                 <div id="statPayments" class="value">₹0</div>
                             </div>
-                        </div>
-
-                        <div class="card small noteCard">
-                            <div class="muted small">Tips</div>
-                            <ul class="muted small">
-                                <li>Use + Purchase to record sales (increases balance).</li>
-                                <li>Use + Payment to record received money (reduces balance).</li>
-                            </ul>
                         </div>
                     </aside>
                 </div>
