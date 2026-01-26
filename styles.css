@@ -399,3 +399,87 @@ input:focus {
         display: none
     }
 }
+
+/* Show table on small screens and make table wrapper horizontally scrollable */
+@media (max-width: 480px) {
+
+    /* keep layout mobile-friendly but show the table */
+    #txTable {
+        display: table;
+        min-width: 700px;
+    }
+
+    /* ensures columns don't collapse; allows horizontal scroll */
+    .txCards {
+        display: none !important;
+    }
+
+    /* hide card list */
+    .txTableWrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+    }
+
+    /* smoother scroll on mobile */
+    /* make cells more compact on small screens */
+    #txTable th,
+    #txTable td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+}
+
+/* ---------------- White transaction table (on-screen only) ---------------- */
+#txTable {
+    background: #ffffff;
+    color: #0b1220;
+    /* dark text for readability on white */
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+    overflow: hidden;
+    border-collapse: separate;
+    /* keep separate so rounded corners render cleanly */
+    border-spacing: 0;
+}
+
+/* Header style */
+#txTable thead th {
+    background: #f7fafc;
+    /* very light gray header row */
+    color: #374151;
+    /* darker muted header text */
+    font-weight: 700;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+/* Cells */
+#txTable tbody td {
+    background: #ffffff;
+    color: #0b1220;
+    /* ensure body cells are dark on white */
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Column separators — subtle */
+#txTable th,
+#txTable td {
+    border-right: 1px solid #f1f5f9;
+    padding: 12px 10px;
+}
+
+/* Remove extra right border on last column for a clean look */
+#txTable th:last-child,
+#txTable td:last-child {
+    border-right: none;
+}
+
+/* Keep alternate-row subtle effect (still white, but keeps spacing consistent) */
+#txTable tbody tr:nth-child(even) td {
+    background: #ffffff;
+}
+
+/* If you have the mobile horizontal-scroll enabled, make sure the wrapper is neutral */
+.txTableWrap {
+    background: transparent;
+}
