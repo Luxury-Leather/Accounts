@@ -3,127 +3,136 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Luxury Leather — Client Ledger</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Luxury Leather</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <div class="brand">
-                <div class="logo-circle">LL</div>
-                <div>
-                    <h1>Luxury Leather</h1>
-                    <p class="tag">Client Ledger • Payments & Balances</p>
+    <div class="root">
+        <aside class="sidebar" aria-label="Sidebar" id="sidebar">
+            <div class="sidebarTop">
+                <div class="brand">
+                    <div class="logo" aria-hidden="true">CL</div>
+                    <div class="brandText">
+                        <div class="title">Luxury Leather</div>
+                    </div>
                 </div>
-            </div>
-            <div class="controls">
-                <input id="search" type="search" placeholder="Search clients..." />
-            </div>
-        </div>
-    </header>
 
-    <main class="container main-grid">
-        <aside class="panel add-panel">
-            <h2>Add Client</h2>
-            <form id="clientForm" class="form">
-                <label>
-                    Client name
-                    <input id="clientName" required placeholder="eg. Rahul Sharma" />
-                </label>
-                <label>
-                    Total amount (₹)
-                    <input id="clientTotal" required type="number" step="0.01" min="0" placeholder="eg. 25000" />
-                </label>
-                <label>
-                    Initial received (optional)
-                    <input id="clientInitial" type="number" step="0.01" min="0" placeholder="eg. 5000" />
-                </label>
-                <div class="form-actions">
-                    <button id="addClientBtn" class="btn primary" type="submit">Add Client</button>
-                </div>
+                <button id="clientsToggle" class="btn ghost clientsToggle" aria-expanded="false"
+                    aria-controls="clientsDrawer" title="Show clients">☰</button>
+            </div>
+
+            <form id="addClientForm" class="addClient" autocomplete="off">
+                <input id="clientName" name="clientName" type="text" placeholder="New client name" required
+                    maxlength="120" />
+                <button class="btn primary" type="submit">Add</button>
             </form>
 
-            <hr />
-
-            <div class="help">
-                <h3>How it works</h3>
-                <p>Click a client to view payments. Use the <strong>＋</strong> in the modal to add a payment for today
-                    or add with a custom date. Balances update automatically.</p>
+            <div id="clientsDrawer" class="clientsDrawer">
+                <div class="clientsCard card" aria-live="polite">
+                    <div class="cardHeaderSmall">Clients <span id="clientsCount" class="muted">0</span></div>
+                    <ul id="clientsUl" class="clientsList" role="list"></ul>
+                </div>
             </div>
+
+            <div class="sidebarFooter muted">Developed by MORPHIX INTERNATIONAL</div>
         </aside>
 
-        <section class="panel clients-panel">
-            <div class="panel-header">
-                <h2>Clients</h2>
-                <div id="summary" class="summary-pill">Loading…</div>
+        <main class="main" id="main" role="main">
+            <div id="emptyState" class="emptyState card">
+                <h2>Start tracking your clients</h2>
+                <p>Create a client on the left then tap their name to add purchases or payments.</p>
             </div>
 
-            <div id="clientsGrid" class="clients-grid">
-                <!-- client cards appear here -->
-            </div>
-
-            <div id="emptyState" class="empty-state">
-                <p>No clients yet — add your first client on the left.</p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Client modal -->
-    <div id="clientModal" class="modal" aria-hidden="true">
-        <div class="modal-backdrop" data-close="true"></div>
-        <div class="modal-panel">
-            <header class="modal-header">
-                <h3 id="modalClientName">Client</h3>
-                <div class="modal-actions">
-                    <button id="quickAddBtn" class="icon-btn" title="Quick add payment for today">＋</button>
-                    <button id="closeModal" class="icon-btn" title="Close">✕</button>
-                </div>
-            </header>
-
-            <div class="modal-body">
-                <div class="client-totals">
-                    <div><label>Total</label>
-                        <div id="modalTotal">—</div>
+            <section id="clientCard" class="clientCard card cool" hidden>
+                <header class="clientHeader">
+                    <div>
+                        <h1 id="clientTitle">Client Name</h1>
+                        <div class="muted small">ID: <span id="clientIdShort"></span></div>
                     </div>
-                    <div><label>Received</label>
-                        <div id="modalReceived">—</div>
-                    </div>
-                    <div><label>Balance</label>
-                        <div id="modalBalance">—</div>
-                    </div>
-                </div>
 
-                <div class="payment-controls">
-                    <form id="paymentForm" class="inline-form">
-                        <input id="payAmount" type="number" step="0.01" min="0" placeholder="Amount" required />
-                        <input id="payDate" type="date" />
-                        <button class="btn" type="submit">Add Payment</button>
-                    </form>
-                </div>
+                    <div class="clientControls">
+                        <div class="balanceWrap" aria-hidden="true">
+                            <div class="balanceLabel">Balance</div>
+                            <div id="clientBalance" class="balance">₹0</div>
+                        </div>
 
-                <table class="payments-table" id="paymentsTable">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Received (₹)</th>
-                            <th>Balance (₹)</th>
-                            <th>Total (₹)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- payment rows -->
-                    </tbody>
-                </table>
-            </div>
+                        <div class="actions" role="group" aria-label="Client actions">
+                            <button class="btn outline" id="btnNewPurchase" type="button">+ Purchase</button>
+                            <button class="btn outline" id="btnNewPayment" type="button">+ Payment</button>
+                            <button class="btn primary" id="btnDownloadCard" type="button">Download</button>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="clientBody">
+                    <div class="transactionsPanel">
+                        <div class="txHeader">
+                            <h3>Transactions</h3>
+                            <div class="muted">All purchases & payments </div>
+                        </div>
+                        <div class="txTableWrap">
+                            <!-- default table for wide screens -->
+                            <table id="txTable" role="table" aria-label="Transactions table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <!-- mobile list (cards) — filled by JS on small screens -->
+                            <div id="txCards" class="txCards" aria-hidden="true"></div>
+                        </div>
+                    </div>
+
+                    <aside class="rightPanel" aria-label="Client summary">
+                        <div class="card small quickStats">
+                            <div class="stat">
+                                <div class="label">Total Purchases</div>
+                                <div id="statPurchases" class="value">₹0</div>
+                            </div>
+                            <div class="stat">
+                                <div class="label">Total Payments</div>
+                                <div id="statPayments" class="value">₹0</div>
+                            </div>
+                        </div>
+
+                        <div class="card small noteCard">
+                            <div class="muted small">Tips</div>
+                            <ul class="muted small">
+                                <li>Use + Purchase to record sales (increases balance).</li>
+                                <li>Use + Payment to record received money (reduces balance).</li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal (mobile-friendly) -->
+    <div id="modal" class="modal" aria-hidden="true">
+        <div class="modalCard card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modalClose" id="modalClose" type="button" aria-label="Close modal">✕</button>
+            <div id="modalBody"></div>
         </div>
     </div>
-    <!-- scripts as modules -->
-    <script type="module" src="firebase.js"></script>
-    <script type="module" src="script.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
