@@ -483,3 +483,47 @@ input:focus {
 .txTableWrap {
     background: transparent;
 }
+
+/* ---------------- LOGIN FORM (modal) ---------------- */
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 260px;
+}
+
+.loginForm label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.loginForm input[type="text"],
+.loginForm input[type="password"] {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    color: var(--text);
+}
+
+.loginActions {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.loginRemember {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.loginError {
+    color: var(--danger);
+    font-size: 13px;
+    display: none;
+}
