@@ -1,0 +1,386 @@
+:root {
+    --bg: #0f1724;
+    --panel: #0b1220;
+    --panel-2: #0d1a2b;
+    --text: #e6eef6;
+    --muted: #9aa6b2;
+    --accent1: #6ee7b7;
+    --accent2: #7c5cff;
+    --danger: #ff6b6b;
+
+    --radius-lg: 14px;
+    --radius-sm: 10px;
+    --gap: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--text);
+    background: linear-gradient(180deg, #061225 0%, #071a2a 100%);
+    -webkit-font-smoothing: antialiased;
+}
+
+.root {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---------------- SIDEBAR ---------------- */
+
+.sidebar {
+    width: 300px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebarTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent1));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.brandText .title {
+    font-weight: 700;
+}
+
+.brandText .subtitle {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.clientsToggle {
+    display: none;
+    font-size: 22px;
+}
+
+/* ---------------- FORMS & BUTTONS ---------------- */
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--panel);
+    color: var(--text);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent2);
+}
+
+.btn {
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, var(--accent2), var(--accent1));
+    color: #08121f;
+}
+
+.btn.outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text);
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--text);
+}
+
+/* ---------------- CLIENT LIST ---------------- */
+
+.clientsDrawer {
+    display: block;
+}
+
+.clientsCard {
+    background: var(--panel);
+    border-radius: var(--radius-lg);
+    padding: 12px;
+}
+
+.clientsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.clientsList li {
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clientsList li:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebarFooter {
+    margin-top: auto;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* ---------------- MAIN ---------------- */
+
+.main {
+    flex: 1;
+    padding: 16px;
+}
+
+.card {
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.emptyState {
+    max-width: 600px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.clientHeader {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.balance {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* ---------------- TRANSACTIONS ---------------- */
+
+.txTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.txTable th,
+.txTable td {
+    padding: 12px;
+    text-align: left;
+}
+
+.txTable th {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.txTable tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- MOBILE TRANSACTION CARDS ---------- */
+
+.txCards {
+    display: none;
+}
+
+.txCard {
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.03),
+            rgba(255, 255, 255, 0.015));
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.txCard .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.txCard .row:last-child {
+    border-style: solid;
+}
+
+.label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ---------------- MODAL ---------------- */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modalCard {
+    width: 420px;
+    max-width: 95%;
+    background: var(--panel);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    position: relative;
+}
+
+.modalClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ---------------- CALENDAR ---------------- */
+
+.calendarContainer {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.calendarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendarWeekday {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.day {
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.day:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.day--today {
+    border: 1px solid var(--accent1);
+}
+
+.day--selected {
+    background: linear-gradient(135deg, var(--accent2), var(--accent1));
+    color: #08121f;
+}
+
+.day--disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 900px) {
+    .root {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .clientsToggle {
+        display: inline-flex;
+    }
+
+    .clientsDrawer {
+        display: none;
+    }
+
+    body.show-clients .clientsDrawer {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .txTable {
+        display: none;
+    }
+
+    .txCards {
+        display: block;
+    }
+
+    .modalCard {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .brandText {
+        display: none;
+    }
+}
