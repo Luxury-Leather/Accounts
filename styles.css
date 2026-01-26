@@ -1,16 +1,17 @@
 :root {
-    --bg: #0f1724;
-    --panel: #0b1220;
-    --panel-2: #0d1a2b;
-    --text: #e6eef6;
+    /* Refined professional dark palette (change these variables for other themes) */
+    --bg: #071021;
+    --panel: #0d1724;
+    --panel-2: #0a1320;
+    --text: #eef6f9;
     --muted: #9aa6b2;
-    --accent1: #6ee7b7;
-    --accent2: #7c5cff;
+    --accent: #c79b48;
+    --accent-2: #6ee7b7;
     --danger: #ff6b6b;
 
-    --radius-lg: 14px;
+    --radius-lg: 16px;
     --radius-sm: 10px;
-    --gap: 14px;
+    --gap: 16px;
 }
 
 * {
@@ -22,122 +23,137 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
     color: var(--text);
-    background: linear-gradient(180deg, #061225 0%, #071a2a 100%);
-    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(180deg, #041021 0%, #071022 100%);
+    -webkit-font-smoothing: antialiased
 }
 
 .root {
     display: flex;
-    min-height: 100vh;
+    min-height: 100vh
 }
 
 /* ---------------- SIDEBAR ---------------- */
-
 .sidebar {
-    width: 300px;
-    padding: 16px;
+    width: 320px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 12px
 }
 
 .sidebarTop {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between
 }
 
 .brand {
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 12px;
+    align-items: center
 }
 
 .logo {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--accent2), var(--accent1));
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(199, 155, 72, 0.12), rgba(110, 231, 183, 0.12));
+    color: var(--accent);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
+    font-size: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.03)
 }
 
 .brandText .title {
     font-weight: 700;
+    font-size: 18px
 }
 
 .brandText .subtitle {
     font-size: 12px;
-    color: var(--muted);
+    color: var(--muted)
 }
 
 .clientsToggle {
     display: none;
-    font-size: 22px;
+    font-size: 22px
 }
 
 /* ---------------- FORMS & BUTTONS ---------------- */
-
-input {
+input,
+select,
+textarea {
     width: 100%;
     padding: 10px 12px;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: var(--panel);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
     color: var(--text);
+    transition: box-shadow .15s, border-color .15s
 }
 
 input:focus {
     outline: none;
-    border-color: var(--accent2);
+    border-color: rgba(199, 155, 72, 0.9);
+    box-shadow: 0 4px 18px rgba(199, 155, 72, 0.08)
 }
 
 .btn {
     padding: 10px 14px;
-    border-radius: var(--radius-sm);
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     font-weight: 600;
+    transition: transform .08s ease, box-shadow .08s
+}
+
+.btn:active {
+    transform: translateY(1px)
 }
 
 .btn.primary {
-    background: linear-gradient(135deg, var(--accent2), var(--accent1));
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
     color: #08121f;
+    box-shadow: 0 6px 22px rgba(14, 21, 30, 0.6);
+}
+
+.btn.primary:hover {
+    transform: translateY(-2px)
 }
 
 .btn.outline {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: var(--text);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text)
 }
 
 .btn.ghost {
     background: transparent;
-    color: var(--text);
+    color: var(--text)
 }
 
 /* ---------------- CLIENT LIST ---------------- */
-
 .clientsDrawer {
-    display: block;
+    display: block
 }
 
 .clientsCard {
-    background: var(--panel);
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
     border-radius: var(--radius-lg);
-    padding: 12px;
+    padding: 14px
 }
 
 .clientsList {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 50vh;
-    overflow-y: auto;
+    max-height: 54vh;
+    overflow-y: auto
 }
 
 .clientsList li {
@@ -147,90 +163,114 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background .12s
 }
 
 .clientsList li:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03)
 }
 
 .sidebarFooter {
     margin-top: auto;
     font-size: 12px;
     color: var(--muted);
-    text-align: center;
+    text-align: center
 }
 
 /* ---------------- MAIN ---------------- */
-
 .main {
     flex: 1;
-    padding: 16px;
+    padding: 22px
 }
 
 .card {
-    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.02));
     border-radius: var(--radius-lg);
-    padding: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6)
 }
 
 .emptyState {
-    max-width: 600px;
+    max-width: 680px;
     margin: 60px auto;
-    text-align: center;
+    text-align: center
 }
 
 .clientHeader {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 18px
 }
 
 .balance {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 28px;
+    font-weight: 800
 }
 
 /* ---------------- TRANSACTIONS ---------------- */
-
-.txTable {
+#txTable {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 14px
 }
 
-.txTable th,
-.txTable td {
-    padding: 12px;
-    text-align: left;
+/* visible borders for on-screen transaction table */
+#txTable th,
+#txTable td {
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background-clip: padding-box;
 }
 
-.txTable th {
-    color: var(--muted);
-    font-weight: 600;
-}
-
-.txTable tr {
+/* make header row slightly different */
+#txTable thead th {
+    background: rgba(255, 255, 255, 0.02);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* ---------- MOBILE TRANSACTION CARDS ---------- */
 
+#txTable th {
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04)
+}
+
+#txTable th:nth-child(3),
+#txTable th:nth-child(4),
+#txTable td:nth-child(3),
+#txTable td:nth-child(4) {
+    text-align: right
+}
+
+#txTable .num {
+    font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-variant-numeric: tabular-nums
+}
+
+#txTable tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03)
+}
+
+#txTable tbody tr:nth-child(even) {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.008), transparent)
+}
+
+/* ---------- MOBILE TRANSACTION CARDS ---------- */
 .txCards {
-    display: none;
+    display: none
 }
 
 .txCard {
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.03),
-            rgba(255, 255, 255, 0.015));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
     border-radius: 12px;
     padding: 12px;
     margin-bottom: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.04);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 8px
 }
 
 .txCard .row {
@@ -239,42 +279,36 @@ input:focus {
     align-items: center;
     padding: 8px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px dashed rgba(255, 255, 255, 0.06);
-}
-
-.txCard .row:last-child {
-    border-style: solid;
+    background: rgba(255, 255, 255, 0.01);
 }
 
 .label {
     color: var(--muted);
-    font-size: 13px;
+    font-size: 13px
 }
 
 /* ---------------- MODAL ---------------- */
-
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(2, 6, 23, 0.6);
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 1000
 }
 
 .modal.open {
-    display: flex;
+    display: flex
 }
 
 .modalCard {
-    width: 420px;
+    width: 460px;
     max-width: 95%;
     background: var(--panel);
     border-radius: var(--radius-lg);
     padding: 20px;
-    position: relative;
+    position: relative
 }
 
 .modalClose {
@@ -285,102 +319,83 @@ input:focus {
     border: none;
     color: var(--muted);
     font-size: 20px;
-    cursor: pointer;
+    cursor: pointer
 }
 
-/* ---------------- CALENDAR ---------------- */
-
+/* calendar */
 .calendarContainer {
     margin-top: 10px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.02);
     border-radius: 12px;
-    padding: 10px;
-}
-
-.calendarHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+    padding: 10px
 }
 
 .calendarGrid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-}
-
-.calendarWeekday {
-    text-align: center;
-    font-size: 12px;
-    color: var(--muted);
+    gap: 6px
 }
 
 .day {
     text-align: center;
     padding: 8px 0;
     border-radius: 8px;
-    cursor: pointer;
-}
-
-.day:hover {
-    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer
 }
 
 .day--today {
-    border: 1px solid var(--accent1);
+    border: 1px solid var(--accent-2)
 }
 
 .day--selected {
-    background: linear-gradient(135deg, var(--accent2), var(--accent1));
-    color: #08121f;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    color: #08121f
 }
 
 .day--disabled {
-    opacity: 0.2;
-    pointer-events: none;
+    opacity: 0.25;
+    pointer-events: none
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-
-@media (max-width: 900px) {
+/* responsive */
+@media (max-width:900px) {
     .root {
-        flex-direction: column;
+        flex-direction: column
     }
 
     .sidebar {
-        width: 100%;
+        width: 100%
     }
 
     .clientsToggle {
-        display: inline-flex;
+        display: inline-flex
     }
 
     .clientsDrawer {
-        display: none;
+        display: none
     }
 
     body.show-clients .clientsDrawer {
-        display: block;
+        display: block
     }
 }
 
-@media (max-width: 480px) {
-    .txTable {
-        display: none;
+@media (max-width:480px) {
+    #txTable {
+        display: none
     }
 
     .txCards {
-        display: block;
+        display: block
     }
 
     .modalCard {
         width: 100%;
         height: 100%;
-        border-radius: 0;
+        border-radius: 0
     }
 
     .brandText {
-        display: none;
+        display: none
     }
 }
