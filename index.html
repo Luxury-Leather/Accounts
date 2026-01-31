@@ -83,13 +83,15 @@
                             <h3>Transactions</h3>
                         </div>
                         <div class="txTableWrap">
-                            <!-- default table for wide screens -->
+                            <!-- table for wide screens -->
                             <table id="txTable" role="table" aria-label="Transactions table">
                                 <colgroup>
+                                    <col style="width:18%">
+                                    <col style="width:24%">
+                                    <col style="width:18%">
                                     <col style="width:20%">
-                                    <col style="width:30%">
-                                    <col style="width:25%">
-                                    <col style="width:25%">
+                                    <col style="width:10%">
+                                    <col style="width:10%">
                                 </colgroup>
                                 <thead>
                                     <tr>
@@ -97,6 +99,8 @@
                                         <th scope="col">Type</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">Balance</th>
+                                        <th scope="col" aria-label="Edit">Edit</th>
+                                        <th scope="col" aria-label="Delete">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
